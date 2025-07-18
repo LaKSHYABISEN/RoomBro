@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Choose Your Dream Flat</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .flat-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .flat {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px 25px;
+      width: 200px;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      backdrop-filter: blur(5px);
+      position: relative;
+    }
+
+    .flat:hover {
+      transform: scale(1.05);
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .flat h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .flat p {
+      font-size: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Glowing border effect */
+    .flat::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 15px;
+      padding: 2px;
+      background: linear-gradient(45deg, #f3ec78, #af4261, #00c6ff);
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      z-index: -1;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🏠 Choose Your Dream Flat</h1>
+    <div class="flat-options">
+      <a href="{% url 'flat_1bhk' %}">
+        <div class="flat" onclick="highlight(this)">
+          <h2>1 BHK</h2>
+          <p>Compact and Affordable</p>
+        </div>
+      </a>
+      <a href="{% url 'flat_2bhk' %}">
+        <div class="flat" onclick="highlight(this)">
+          <h2>2 BHK</h2>
+          <p>Spacious and Elegant</p>
+        </div>
+      </a>
+      <a href="{% url 'flat_3bhk' %}">
+        <div class="flat" onclick="highlight(this)">
+          <h2>3 BHK</h2>
+          <p>Perfect for Families</p>
+        </div>
+      </a>
+      <a href="{% url 'flat_4bhk' %}">
+        <div class="flat" onclick="highlight(this)">
+          <h2>4 BHK</h2>
+          <p>Luxury and Comfort</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function highlight(elem) {
+      elem.style.boxShadow = "0 0 20px 10px rgba(255,255,255,0.7)";
+      setTimeout(() => {
+        elem.style.boxShadow = "";
+      }, 300);
+    }
+
+    // Unbelievable JS entrance animation
+    document.querySelectorAll('.flat').forEach((flat, index) => {
+      flat.style.opacity = "0";
+      setTimeout(() => {
+        flat.style.transition = "all 0.7s ease";
+        flat.style.opacity = "1";
+        flat.style.transform = "translateY(0)";
+      }, 300 + index * 200);
+    });
+  </script>
+</body>
+</html>
